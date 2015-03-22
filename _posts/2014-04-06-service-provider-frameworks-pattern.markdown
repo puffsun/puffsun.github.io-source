@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "service provider frameworks"
+title: "Service Provider Frameworks Pattern"
 date: 2014-04-06 22:39:44 +0800
 comments: true
 categories: Java
@@ -10,10 +10,13 @@ description: JDBC Service Provider Frameworks pattern SPI service provicer mecha
 
 ###Overview
 In [Effective Java, second edition](http://www.amazon.com/Effective-Java-Edition-Joshua-Bloch/dp/0321356683), the author mentioned a pattern called Service Provider frameworks. The author wrote:
+
 > A service provider framework is a system in which multiple service providers implement a service, and the system makes the implementations available to its clients, decoupling them from the implementations.
 
 In this blog post, I'll talk about the details of Service Provider Frameworks thru it's application in JDK, to be specific, in JDBC and Codec lookup.
+
 <!--more-->
+
 [^1]As the author said, there are three essential components of a service provider framework: a **service interface**, which providers implement; a **provider registration API**, which the system uses to register implementations, giving clients access to them; and a **service access API**, which clients use to obtain an instance of the service. The service access API typically allows but does not require the client to specify some criteria for choosing a provider. In the absence of such a specification, the API returns an instance of a default implementation. The service access API is the “flexible static factory” that forms the basis of the service provider framework.
 
 An optional fourth component of a service provider framework is a **service provider interface**, which providers implement to create instances of their service implementation. *In the absence of a service provider interface, implementations are registered by class name and instantiated reflectively*.
@@ -21,18 +24,22 @@ An optional fourth component of a service provider framework is a **service prov
 ###Service Provider Frameworks in JDBC
 In the case of [JDBC](http://www.oracle.com/technetwork/java/javase/jdbc/index.html), [Connection](http://docs.oracle.com/javase/7/docs/api/java/sql/Connection.html) plays the part of the service interface, [DriverManager.registerDriver](http://docs.oracle.com/javase/7/docs/api/java/sql/DriverManager.html#registerDriver\(java.sql.Driver\)) is the provider registration API, [DriverManager.getConnection](http://docs.oracle.com/javase/7/docs/api/java/sql/DriverManager.html#getConnection\(java.lang.String\)) is the service access API, and [Driver](http://docs.oracle.com/javase/7/docs/api/java/sql/Driver.html) is the service provider interface.
 
-Usually in order to use JDBC, you should execute below code:
-```java
-      // Register JDBC driver, before JDBC 4.0 only
-      Class.forName("com.mysql.jdbc.Driver");
+Usually in order to use JDBC, you should write below code:
+{%highlight java linenos%}
+// Register JDBC driver, before JDBC 4.0 only
+Class.forName("com.mysql.jdbc.Driver");
 
-      // Open a connection
-      System.out.println("Connecting to database...");
-      conn = DriverManager.getConnection(DB_URL,USER,PASS);
-```
+// Open a connection
+System.out.println("Connecting to database...");
+conn = DriverManager.getConnection(DB_URL,USER,PASS);
+{%endhighlight%}
 The <code>Class.forname("com.mysql.jdbc.Driver")</code> can be eliminated after JDBC 4.0, as you can see in the document of [DriverManager](http://docs.oracle.com/javase/7/docs/api/java/sql/DriverManager.html)
+
+---
 > The DriverManager methods getConnection and getDrivers have been enhanced to support the Java Standard Edition [Service Provider](http://docs.oracle.com/javase/7/docs/technotes/guides/jar/jar.html#Service%20Provider) mechanism. JDBC 4.0 Drivers must include the file META-INF/services/java.sql.Driver. This file contains the name of the JDBC drivers implementation of java.sql.Driver. For example, to load the my.sql.Driver class, the META-INF/services/java.sql.Driver file would contain the entry:
+>
 > my.sql.Driver
+>
 > Applications no longer need to explicitly load JDBC drivers using <code>Class.forName()</code>. Existing programs which currently load JDBC drivers using Class.forName() will continue to work without modification.
 
 ###Service Provider mechanism[^2]
@@ -47,27 +54,30 @@ A service provider identifies itself by placing a provider-configuration file in
 
 ###Example of Service Provider mechanism
 Suppose we have a service class named <code>java.io.spi.CharCodec</code>. It has two abstract methods:
-```java
+
+{%highlight java%}
 public abstract CharEncoder getEncoder(String encodingName);
 public abstract CharDecoder getDecoder(String encodingName);
-```
+{%endhighlight%}
+
 Each method returns an appropriate object or null if it cannot translate the given encoding. Typical CharCodec providers will support more than one encoding.
 
 If <code>sun.io.StandardCodec</code> is a provider of the <code>CharCodec</code> service then its jar file would contain the file <code>META-INF/services/java.io.spi.CharCodec</code>. This file would contain the single line:
 <code>sun.io.StandardCodec    # Standard codecs for the platform</code>
 To locate an encoder for a given encoding name, the internal I/O code would do something like this:
-```java
-   CharEncoder getEncoder(String encodingName) {
-       Iterator ps = Service.providers(CharCodec.class);
-       while (ps.hasNext()) {
-           CharCodec cc = (CharCodec)ps.next();
-           CharEncoder ce = cc.getEncoder(encodingName);
-           if (ce != null)
-               return ce;
-       }
-       return null;
+{%highlight java linenos%}
+CharEncoder getEncoder(String encodingName) {
+   Iterator ps = Service.providers(CharCodec.class);
+   while (ps.hasNext()) {
+       CharCodec cc = (CharCodec)ps.next();
+       CharEncoder ce = cc.getEncoder(encodingName);
+       if (ce != null)
+           return ce;
    }
-```
+   return null;
+}
+{%endhighlight%}
+
 The provider-lookup mechanism always executes in the security context of the caller. Trusted system code should typically invoke the methods in this class from within a privileged security context.
 
 ###How Service Provider mechanism works in JDBC
