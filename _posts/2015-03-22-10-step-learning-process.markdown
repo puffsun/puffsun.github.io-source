@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "10-step Process to Learn any new Technology"
+title: "10-step Process to Learn Any New Technology"
 date: 2015-03-22T19:01:43+08:00
 comments: true
 categories: ["learn"]
