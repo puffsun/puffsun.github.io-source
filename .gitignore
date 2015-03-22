@@ -2,3 +2,5 @@
 .rbenv-gemsets
 .sass-cache
 _site
+.deploy
+_deploy.yml
