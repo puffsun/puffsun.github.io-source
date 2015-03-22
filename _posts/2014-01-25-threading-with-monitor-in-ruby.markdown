@@ -17,7 +17,8 @@ Let's see an example with deadlock, then we resolve it with MonitorMixin library
 <!--more-->
 
 Here's the defected code:
-```ruby
+
+{%highlight ruby linenos%}
 require 'thread'
 
 class Todo
@@ -66,10 +67,11 @@ class Todo
     end
   end
 end
-```
+{%endhighlight%}
+
 Let's try it in interactive Ruby, note that I use [Pry](http://pryrepl.org/) as replacement of plain old irb, you should give it a try too, it's pretty powerful.
 
-```ruby
+{%highlight ruby%}
 [30] pry(main)> require_relative 'deadlock_example'
 => true
 [31] pry(main)> todo = Todo.new
@@ -78,11 +80,13 @@ Let's try it in interactive Ruby, note that I use [Pry](http://pryrepl.org/) as 
 ThreadError: deadlock; recursive locking
 from /Users/gsun/prog/ruby/george/deadlock_example.rb:39:in `synchronize'
 [33] pry(main)>
-```
+{%endhighlight%}
+
 Sure enough, we have a deadlock on our hands. These types of bugs can be difficult to track down in real life programming.
 
 Now let's see how to use MonitorMixin to enable nested lock, above example was refactored like this:
-```ruby
+
+{%highlight ruby linenos%}
 require 'monitor'
 
 class Todo
@@ -134,10 +138,10 @@ class Todo
     end
   end
 end
-```
+{%endhighlight%}
 
 Now let's try it in Pry:
-```ruby
+{%highlight ruby%}
 [1] pry(main)> require_relative 'example'
 => true
 [2] pry(main)> todo = Todo.new
@@ -150,7 +154,8 @@ Now let's try it in Pry:
 [3] pry(main)> todo.add('Item 1')
 => 1
 [4] pry(main)>
-```
+{%endhighlight%}
+
 The deadlock is gone since the synchronize method can handle nested locks, you don't have to worry about having a deadlock, unlike the Mutex version. If you know Java, you can see the synchronize method is similar to the synchronized keyword in Java. 
 
 The moral is that we should consider MonitorMixin library for every case that need synchronize, even the simplest one.
