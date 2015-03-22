@@ -1,0 +1,17 @@
+# Site settings
+title: George's dream port
+header-img: img/home-bg.jpg
+email: sunwinner3@gmail.com
+description: "Yet another tech blog!"
+baseurl: ""
+url: "http://codethoughts.info"
+twitter_username: kui_sun
+github_username:  puffsun
+facebook_username:  puffsun
+
+# Build settings
+markdown: kramdown
+highlighter: pygments
+permalink: pretty
+paginate: 5
+exclude: ["less","node_modules","Gruntfile.js","package.json","README.md"]
