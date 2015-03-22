@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "solutions to scala for the impatient - chapter5"
+title: "Solutions to Scala for the Impatient - Chapter5"
 date: 2014-03-09 20:03:35 +0800
 comments: true
 categories: Scala
@@ -10,7 +10,7 @@ description: Scala for the impatient solutions
 
 1\. Improve the Counter class in Section 5.1, “Simple Classes and Parameterless Methods,” on page 49 so that it doesn’t turn negative at <code>Int.MaxValue</code>.
 
-```scala
+{%highlight scala linenos%}
 class Counter {
   private var value = 0
 
@@ -20,11 +20,13 @@ class Counter {
   }
   def current = value
 }
-```
+{%endhighlight%}
+
 <!--more-->
+
 2\. Write a class <code>BankAccount</code> with methods <code>deposit</code> and <code>withdraw</code>, and a read-only property <code>balance</code>.
 
-```scala
+{%highlight scala linenos%}
 class BankAccount(private var _balance: Double = 0.0) {
 
   def deposit(amount: Double) = {
@@ -42,10 +44,10 @@ class BankAccount(private var _balance: Double = 0.0) {
 
   def balance = _balance
 }
-```
+{%endhighlight%}
 
 3\. Write a class <code>Time</code> with read-only properties <code>hours</code> and <code>minutes</code> and a method <code>before(other: Time): Boolean</code> that checks whether this time comes before the other. A <code>Time</code> object should be constructed as <code>new Time(hrs, min)</code>, where hrs is in military time format (between 0 and 23).
-```scala
+{%highlight scala linenos%}
 class Time(val hours: Int, val minutes: Int) {
   // Validations goes here.
   if (hours > 23 || hours < 0) {
@@ -65,11 +67,11 @@ class Time(val hours: Int, val minutes: Int) {
     false
   }
 }
-```
+{%endhighlight%}
 
 4\. Reimplement the Time class from the preceding exercise so that the internal representation is the number of minutes since midnight (between 0 and 24 × 60 – 1). Do not change the public interface. That is, client code should be unaffected by your change.
 
-```scala
+{%highlight scala linenos%}
 class Time(private val _hours: Int, private val _minutes: Int) {
 
   if (hours > 23 || hours < 0) {
@@ -92,10 +94,10 @@ class Time(private val _hours: Int, private val _minutes: Int) {
       false
   }
 }
-```
+{%endhighlight%}
 
 5\. Make a class <code>Student</code> with read-write JavaBeans properties name (of type <code>String</code>) and id (of type <code>Long</code>). What methods are generated? (Use javap to check.) Can you call the JavaBeans getters and setters in Scala Should you?[^1]
-```scala
+{%highlight scala linenos%}
 import scala.reflect.BeanProperty
 
 class Student(@BeanProperty var name: String, @BeanProperty var id: Long) {  
@@ -103,19 +105,19 @@ class Student(@BeanProperty var name: String, @BeanProperty var id: Long) {
 
 object Main extends App {
   val human = new Student("Dave Grohl", 1337)
-  
+
   // You can call the JavaBeans getter and setter, just like this
   human.setName("Kurt Cobain")
   human.setId(5000)
-  
+
   // But why would you, when the Scala-esque methods are generated?
   human.name = "Krist Novoselic"
   human.id = 5001
 }
-```
+{%endhighlight%}
 
 The output of javap as below:
-```
+{%highlight java linenos%}
 $ javap Student
 // Compiled from "ch5_exercises.scala"
 public class Student {
@@ -129,11 +131,12 @@ public class Student {
   public long getId();
   public Student(java.lang.String, long);
 }
-```
+{%endhighlight%}
+
 You can see that Scala generate getters/setters for you, as well as <code>name</code>, <code>name\_=</code>, <code>id</code>, and <code>id_=</code>.
 
 6\. In the <code>Person</code> class of Section 5.1, “Simple Classes and Parameterless Methods,” on page 49, provide a primary constructor that turns negative ages to 0.
-```scala
+{%highlight scala linenos%}
 class Person(val _name: String, var _age: Int) {
   if (_age < 0)
     _age = 0
@@ -144,10 +147,10 @@ class Person(val _name: String, var _age: Int) {
       _age = new_age
   }
 }
-```
+{%endhighlight%}
 
 7\. Write a class <code>Person</code> with a primary constructor that accepts a string containing a first name, a space, and a last name, such as <code>new Person("Fred Smith")</code>. Supply read-only properties <code>firstName</code> and <code>lastName</code>. Should the primary constructor parameter be a var, a val, or a plain parameter? Why?
-```scala
+{%highlight scala linenos%}
 class Person(val fullname: String) {
   if (fullname == null || fullname.split(" ").size < 2)
     throw new IllegalArgumentException("Name is not be in format of first_name last_name")
@@ -155,24 +158,26 @@ class Person(val fullname: String) {
   val firstName = tmp_name(0)
   val lastName = tmp_name(1)
 }
-```
+{%endhighlight%}
+
 As the primary constructor parameter name suggests, it should be a val to prevent it from being changed, at the same time, it should have a public getter method so that others can get the person's full name.
 
 8\. Make a class <code>Car</code> with read-only properties for <code>manufacturer</code>, <code>model name</code>, and <code>model year</code>, and a read-write property for the <code>license plate</code>. Supply four constructors. All require the <code>manufacturer</code> and <code>model name</code>. Optionally, <code>model year</code> and <code>license plate</code> can also be specified in the constructor. If not, the <code>model year</code> is set to -1 and the <code>license plate</code> to the empty string. Which constructor are you choosing as the primary constructor? Why?
 
 We only need primary constructor here, it can take default parameters, which we can leverage to eliminate the auxiliary constructor, as below code shown:
-```scala
+
+{%highlight scala linenos%}
 class Car(val manufacturer: String, 
     val modelName: String, 
     val modelYear: Int = -1, 
     var licensePlate: String = "") {
 }
-```
+{%endhighlight%}
 
 9\. Reimplement the class of the preceding exercise in Java, C#, or C++ (your choice). How much shorter is the Scala class?
 
 Equivalent Java code as below: 
-```java
+{%highlight java linenos%}
 public class Car {
     private String manufacturer;
     private String modelName;
@@ -218,20 +223,21 @@ public class Car {
         this.licensePlate = licensePlate;
     }
 }
-
-```
+{%endhighlight%}
 
 10\. Consider the class
-```scala
+{%highlight scala%}
 class Employee(val name: String, var salary: Double) {
   def this() { this("John Q. Public", 0.0) }
 }
-```
+{%endhighlight%}
+
 Rewrite it to use explicit fields and a default primary constructor. Which form do you prefer? Why?
 
-```scala
+{%highlight scala%}
 class Employee(val name: String = "John Q. Public", var salary: Double = 0.0) {}
-```
+{%endhighlight%}
+
 I prefer to above code, using primary constructor with default parameters, also there's no explicit getters/setters. After falling love with Ruby programming language, I prefer to any coding style that can lead to concise and short code, most of time, short code is easy to maintain, to test and to develop.
 
 [^1]: [Scala for the Impatient, by McDamon](https://bitbucket.org/McDamon/scalaimpatient/src/4a11167459b2/ch05/answers.txt)
