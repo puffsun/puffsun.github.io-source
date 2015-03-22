@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "understanding java.lang.ref package"
+title: "Understanding of java.lang.ref Package"
 date: 2014-04-07 15:03:55 +0800
 comments: true
 categories: Java
@@ -12,21 +12,23 @@ There're several useful classes under package <code>java.lang.ref.*</code>, whic
 
 ###A Program with Memory Leak
 As Java developer, most of time, you should not pay attention to memory management, JVM GC do that job for you automatically. It can easily lead to the impression that you don’t have to think about memory management, but this isn’t quite true. Consider the following simple cache implementation:
+
 <!--more-->
-```java
+
+{%highlight java linenos%}
 import java.util.HashMap;
 import java.util.Map;
 /*ATTENTION, BUGS AHEAD.*/
 public class UserDataCache {
     private Map<String, Object> cache = new HashMap<>();
-    
+
     public Object getData(String key) {
         if (key == null) {
             throw new NullPointerException("Key should not be null.");
         }
         return cache.get(key);
     }
-    
+
     public void putData(String key, Object data) {
         if (key == null) {
             throw new NullPointerException("Key should not be null.");
@@ -34,14 +36,16 @@ public class UserDataCache {
         cache.put(key, data);
     }
 }
-```
+{%endhighlight%}
+
 If you check above code carefully, you may find that there's a memory leak in side the <code>getData()</code> method. If a cache grows and then shrinks, the objects that were cached will not be garbage collected, even if the program using the cache has no more references to them. This is because the cache maintains obsolete references to these objects. An obsolete reference is simply a reference that will never be dereferenced again. In this case, any references outside of the “active portion” of the element map are obsolete. The active portion consists of the elements whose index is less than size.[^1]
 
 ###Solutions to the Memory Leak
 Now comes the solutions to this memory leak issue. Here I will present several solutions to memory leak in Java program briefly. Since the point of this blog post is about Reference type, I'll talk more on that.
 
 Solution 1: use <code>java.util.LinkedHashMap</code> instead, code shown as below:
-```java
+
+{%highlight java linenos%}
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -72,11 +76,13 @@ public class LinkedHashMapCache {
         cache.put(key, data);
     }
 }
-```
+{%endhighlight%}
+
 In above code, whenever the total entries exceed the maximum size of the map, the eldest entry will be overwritten as the latest one, so the memory leak issue is eliminated. More commonly, the useful lifetime of a cache entry is less well defined, with entries becoming less valuable over time. Under these circumstances, the cache should occasionally be cleaned of entries that have fallen into disuse. This can be done by a background thread (perhaps a <code>Timer</code> or <code>ScheduledThreadPoolExecutor</code>) or as a side effect of adding new entries to the cache. The <code>LinkedHashMap</code> class facilitates the latter approach with its <code>removeEldestEntry</code> method.
 
 Solution 2: this is the real meat of this blog post, use <code>java.lang.ref.WeakHashMap</code> instead of <code>java.util.HashMap</code>
-```java
+
+{%highlight java linenos%}
 import java.util.Map;
 import java.util.WeakHashMap;
 
@@ -98,13 +104,16 @@ public class WeakHashMapCache {
         return map.get(key);
     }
 }
-```
+{%endhighlight%}
+
 Why could the <code>java.lang.ref.WeakHashMap</code> come to rescue? Let's dig deeper into what is weak references, how to use them, and when to use them.
 
 ###Description in [Javadoc package summary](http://docs.oracle.com/javase/7/docs/api/java/lang/ref/package-summary.html) of java.lang.ref
+
 > Provides reference-object classes, which support a limited degree of interaction with the garbage collector. A program may use a reference object to maintain a reference to some other object in such a way that the latter object may still be reclaimed by the collector. A program may also arrange to be notified some time after the collector has determined that the reachability of a given object has changed.
 
 So what is reachability, here is the explanation from that document too:
+
 >Going from strongest to weakest, the different levels of reachability reflect the life cycle of an object. They are operationally defined as follows:
 
 * An object is strongly reachable if it can be reached by some thread without traversing any reference objects. A newly-created * object is strongly reachable by the thread that created it.
@@ -119,14 +128,16 @@ At this point, you must be wondering about the difference, and the need, to have
 
 ###Strong References [^2]
 The references that we create using the assignment operator are known as strong references, because the instance is strongly referred by the application, making it ineligible for garbage collection.
-```java
+{%highlight java%}
 Object o = new Object();
-```
+{%endhighlight%}
+
 Soft, Weak and Phantom references are the weaker counterparts of referencing, where the garbage collection algorithm is allowed to mark an instance to be garbage collected, even though such a reference exists. What this means is that, even though you hold a weak reference to a particular instance, the JVM can sweep it out of the memory if it needs to. This works out great for the problem we discussed before, since instances in our cache will be automatically released if the JVM thinks it needs more memory for other parts.
 
 ###Soft References
 According to the document of [SoftReference](http://docs.oracle.com/javase/7/docs/api/java/lang/ref/SoftReference.html), the JVM implementations are encouraged not to clear out a soft reference if the JVM has enough memory. That is, if free heap space is available, chances are that a soft reference will not be freed during a garbage collection cycle (so it survives from GC).  However, before throwing an <code>OutOfMemoryError</code>, JVM will attempt to reclaim memory by releasing instances that are softly reachable.  This makes Soft References ideal for implementing memory sensitive caches (as in our example problem).
-```java
+
+{%highlight java linenos%}
 public class SoftReferenceSample {
     public static void main(String[] args) {
 
@@ -144,13 +155,14 @@ public class SoftReferenceSample {
         System.out.println("Instance : " + softReference.get());
     }
 }
-```
+{%endhighlight%}
 
 ###Weak References
 Unlike Soft References, Weak References can be reclaimed by the JVM during a GC cycle, even though there’s enough free memory available. As long as GC does not occur, we can retrieve a strong reference out of a weak reference by calling the <code>WeakReference#get()</code> method.
 
 Below is an example code of WeakReference, two of other References can be found under <code>java.lang.ref.*</code> package:
-```java
+
+{%highlight java linenos%}
 import java.lang.ref.WeakReference;
 
 public class WeakReferenceSample {
@@ -174,7 +186,8 @@ public class WeakReferenceSample {
         System.out.println("Instance : " + weakRef.get());
     }
 }
-```
+{%endhighlight%}
+
 From the little toy program you can see how to create WeakReference instances and how to store/get data into/from it either.
 
 ###Phantom References
@@ -184,7 +197,8 @@ Phantom references are the weakest form of referencing. Instances that are refer
 ReferenceQueue is the mechanism provided by the JVM to be notified when a referenced instance is about to be garbage collected. Reference Queues can be used with all of the reference types by passing it to the constructor. When creating a PhantomReference, it is a must to provide a Reference Queue.
 
 Let's see an example of reference queue:
-```java
+
+{%highlight java linenos%}
 import java.lang.ref.PhantomReference;
 import java.lang.ref.ReferenceQueue;
 
@@ -217,7 +231,7 @@ public class PhantomRefQueueSample {
         System.gc();
     }
 }
-```
+{%endhighlight%}
 
 ###WeakHashMap
 <code>java.util.WeakHashMap</code> is a special version of the HashMap, which uses weak references as the key. Therefore, when a particular key is not in use anymore, and it is eligible for garbage collection, the corresponding entry in the WeakHashMap will magically disappear from the map. And the magic relies on ReferenceQueue mechanism explained before to identify when a particular weak reference is to be garbage collected. This is useful when you want to build a cache based on weak references. In more sophisticated requirements, it is better to write your own cache implementation.
