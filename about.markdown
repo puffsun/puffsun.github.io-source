@@ -1,7 +1,7 @@
 ---
 layout: page
 title: "About me"
-description: "Coder, computer nerd."
+description: "Programmer, Computer nerd, Full-stack Web Developer."
 header-img: "img/about-bg.jpg"
 ---
 
