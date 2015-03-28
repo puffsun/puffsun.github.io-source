@@ -266,7 +266,7 @@ func main() {
 
 在上面的代码中，`template.ParseFiles` 读取 `edit.html` 的内容，并返回`*template.Template` 实例。`t.Execute` 运行模板，并将创建的 HTML 内容写入 `http.ResponseWriter`. 这里 `.Title` 和 `.Body` 分别指向 Page 对象里面的 Title 和 Body。
 
-模板被 `{{` 和 `}}` 括起来。`http/template` 的另外一个好处是它可以自动转义生成的 HTML 代码，避免了 [XSS](http://en.wikipedia.org/wiki/Cross-site_scripting) 攻击。
+模板被`{% raw %}{{}}{% endraw %}`括起来。`http/template` 的另外一个好处是它可以自动转义生成的 HTML 代码，避免了 [XSS](http://en.wikipedia.org/wiki/Cross-site_scripting) 攻击。
 
 接下来，我们也顺手把 `viewHandler` 利用 template 清理一下：
 
