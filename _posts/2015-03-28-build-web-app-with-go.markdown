@@ -38,7 +38,7 @@ import (
 {%endhighlight%}
 在import 的两个 package 里面，[io/ioutil](https://golang.org/pkg/io/ioutil/)我们用于从磁盘读写文件，而 [fmt](https://golang.org/pkg/fmt/) 将会用于打印内容到标准输出，一般来说就是你键入命令的 Terminal.
 
-接下来定义我们将使用的核心数据结构，以及用于将文件保存至磁盘和从磁盘加载的方法(method)，注意，这里不是函数(function)：
+接下来定义我们将使用的核心数据结构，以及用于将文件保存至磁盘的方法(method)和从磁盘加载的函数(function)。function 和 method 的主要区别在于 method 是一个面向对象的概念，它可以操作一个对象自身的数据，而且这个数据是隐式传递的；而对 function 而言，所操作的数据是显式作为函数参数传递进来的，详细的解释请见[Difference between a method and a function](http://stackoverflow.com/questions/155609/difference-between-a-method-and-a-function)。另外要注意的是，Go 语言没有内置的面向对象概念，但是我们可以用 `struct` 来模拟面向对象。
 {%highlight go lineno%}
 type Page struct {
     Title string
@@ -365,7 +365,7 @@ func saveHandler(w http.ResponseWriter, r *http.Request) {
 注意这里 HTTP 错误码的运用。当然我们这里会把错误信息直接抛向用户，这也是很不友好的做法，实际项目中可以根据实际情况自定义友好的4xx和5xx 页面。
 
 ### 缓存模板
-到目前为止，我们的代码有个重大的性能，每一次页面请求都会导致模板重新加载、解析，比较好的做法是在启动时把解析好的模板文件缓存起来。随后请求利用[ExecuteTemplate](https://golang.org/pkg/html/template/#Template.ExecuteTemplate)来渲染模板：
+到目前为止，我们的代码有个重大的性能问题，每一次页面请求都会导致模板重新加载、解析，比较好的做法是在启动时把解析好的模板文件缓存起来。随后请求利用[ExecuteTemplate](https://golang.org/pkg/html/template/#Template.ExecuteTemplate)来渲染模板：
 
 {%highlight go lineno%}
 // 全局变量
@@ -474,7 +474,6 @@ func makeHandler(fn func(http.ResponseWriter, *http.Request, string)) http.Handl
 package main
 
 import (
-	"errors"
 	"flag"
 	"html/template"
 	"io/ioutil"
@@ -543,15 +542,6 @@ func renderTemplate(w http.ResponseWriter, tmpl string, p *Page) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-}
-
-func getTitle(w http.ResponseWriter, r *http.Request) (string, error) {
-	m := validPath.FindStringSubmatch(r.URL.Path)
-	if m == nil {
-		http.NotFound(w, r)
-		return "", errors.New("Invalid Page Title")
-	}
-	return m[2], nil
 }
 
 func makeHandler(fn func(http.ResponseWriter, *http.Request, string)) http.HandlerFunc {
