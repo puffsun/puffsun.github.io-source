@@ -6,8 +6,8 @@ description: "Yet another tech blog!"
 baseurl: ""
 url: "http://codethoughts.info"
 twitter_username: kui_sun
-github_username:  puffsun
-facebook_username:  puffsun
+github_username: puffsun
+facebook_username: kui.sun.71
 
 # Build settings
 markdown: kramdown
