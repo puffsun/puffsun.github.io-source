@@ -10,15 +10,20 @@ description: "Deploy Go Web App with Docker"
 ---
 
 ### 几句废话
-按照惯例，先废话几句，再切入正题。学习 Go 语言快一个月了，用 Go 语言实现了[常见的数据结构和算法(持续更新中)](https://github.com/puffsun/go_algorithms_data_structures)，也用 Go 和 AngularJS 创建了一个[迷你 Todo List 项目](https://github.com/puffsun/todos)，回头我会大致介绍一下这个 Todo List 项目的大致结构，现在先聊聊我到目前为止对 Go 语言的观感。因为水平问题，我不可能聊得深入，只是我的个人感受。Go 语言在我看来有如下的优势：
+按照惯例，先废话几句，再切入正题。学习 Go 语言快一个月了，期间用 Go 语言实现了[常见的数据结构和算法(持续更新中)](https://github.com/puffsun/go_algorithms_data_structures)，也用 Go 和 AngularJS 创建了一个[迷你 Todo List 项目](https://github.com/puffsun/todos)，回头我会大致介绍一下这个 Todo List 项目的大致结构，现在先聊聊我到目前为止对 Go 语言的观感。因为水平问题，我不可能聊得深入，只是我的个人感受。Go 语言在我看来有如下的优势：
 
 * Go 编译器把代码和依赖直接编译成机器码，所以部署极其简单，一个二进制文件就可以任意部署。
+
 * 语言层面的并发支持，可以充分支持多核。多核已经成为我们这个时代的常态，Go 代码不需要额外的努力就可以做到充分利用多核。Go 语言的并发范式是[CSP(Communicating Sequential Processes)](http://en.wikipedia.org/wiki/Communicating_sequential_processes)，它的好处之一在于并发程序之间的解耦，从而也有利于并发代码的维护和扩展，在软件领域，解耦永远是一个褒义词。拿 Java 和 Ruby 来比较：
 
     * Java 的内置并发支持来自于 `Thread` 和 `Lock`，我们这里没有足够篇幅讨论 Java 内置库 `java.util.concurrent` 或者 第三方库 [AKKA](http://akka.io/)。Thread 是比较底层的解决方案，类似于给了你锤子和钉子，你可以用它来做足够多的事情，但是经常，你也会不小心把锤子砸到自己手掌上。
+    
     * Ruby 的并发由于[MRI](http://en.wikipedia.org/wiki/Ruby_MRI) 虚拟机中[GIL](http://en.wikipedia.org/wiki/Global_Interpreter_Lock)的存在，变成了伪并发。而如果你把 MRI 上运行的程序直接放到 [JRuby](http://jruby.org/) 或者 [Rubinius](http://rubini.us/) 这些支持真正并发的虚拟机上，多半会有严重的并发问题。
+        
 * Go 的工具链非常强大，比如 `gofmt`, `godef`, `goimports`, `golint`, `godoc`, 等等，Go 核心开发者还特意为 Vim, Emacs 和常见 IDE 用户配备了 [Gocode](https://github.com/nsf/gocode)，在 Gocode 里面，日常编程所需的工具，应有尽有。
+
 * 语法简单，代码简洁。这一条因人而异，对我来说，相对于我以前初学 [Scala](http://www.scala-lang.org/) 的时候，被 Scala 的类型推导搞得七荤八素。而在 Go 语言的学习过程中从没遇到难以理解的概念，一切都顺其自然。
+
 * 函数是 Go 语言的一等公民，这意味着函数可以接收函数作为参数，可以返回函数，带来了无穷的想象力。这一点 Java 和 Ruby 都做不到。Java 刚刚在 Java8 里面支持了闭包；而 Ruby 只能够用代码块来模拟这一功能，而且 Ruby 代码块的限制是最多只能有一个代码块作为参数，即使有这样的限制，Ruby 代码块已经成为 Ruby 的标志性构件之一，那么你想想 Go 里面作为一等公民的函数带来的威力吧。
 
 基于以上的理由，Go 语言已经在我的最喜爱编程语言排行榜上位居第三，前两个分别是 `Java` 和 `JavaScript`, 不服莫辩，个人喜好。
@@ -66,11 +71,11 @@ $ ls public
 css/          favicon.ico   index.html    js/           node_modules/ package.json  readme.md     test/
 {%endhighlight%}
 
-这里有几个需要留意的：
+这里有几处需要留意的：
 
 1. Dockerfile，这就是我们接下来的主角，关于 Dockerfile 的详细知识，参见[Dockerfile Official Reference](https://docs.docker.com/reference/builder/)
 2. app 目录，这里就是我们的后台 Go 代码
-3. public 这里就是我们的前端代码，AngularJS 框架实现的 Single Page Web App. 我们这里采用 `npm` 来获取 AngularJS 和这里要用到的 AngularJS 插件 `angular-mock`, `angular-route`，但是为了方便运行这个项目，我把AngularJS 和插件的源码直接放进版本管理系统，省去了安装 NodeJS 的麻烦(其实也不麻烦)。
+3. public目录， 这里就是我们的前端代码，AngularJS 框架实现的 Single Page Web App. 我们这里采用 `npm` 来获取 AngularJS 和这里要用到的 AngularJS 插件 `angular-mock`, `angular-route`，但是为了方便运行这个项目，我把AngularJS 和插件的源码直接放进版本管理系统，省去了安装 NodeJS 的麻烦(其实也不麻烦)。
 4. Godeps 目录，这是 Go 的第三方依赖管理工具 `godeps` 创建的，这个工具类似 Ruby bundler，详见[这里](https://github.com/tools/godep)。另外它也省去了我们要在 Dockerfile 里详细指定每个 Go 第三方依赖的麻烦，我们只需要在 Dockerfile 中运行 `godep restore` 就可以自动安装所有依赖，当然，前提是你要安装了 godep: `go get github.com/tools/godep`。
 5. run.sh，启动脚本，内容如下：
 
