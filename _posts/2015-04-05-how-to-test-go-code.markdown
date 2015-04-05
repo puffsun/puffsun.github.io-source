@@ -71,7 +71,7 @@ func TestReverse(t *testing.T) {
 }
 {%endhighlight%}
 在代码的根目录下运行 `go test`，输出如下：
-{%highlight bash linenos%}
+{%highlight bash%}
 $ go test
 PASS
 ok      github.com/golang/example/stringutil    0.008s
