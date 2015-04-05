@@ -169,7 +169,7 @@ var _ = Describe("StringutilTest", func() {
 这里需要注意的是：
 
 1. 我们需要在项目根目录下运行 `ginkgo -r .` 来运行 Ginkgo 测试代码；
-2. 我们在Ginkgo 测试里面使用的 package 名为 `stringutil_test`，这个命名有值得注意的地方。通常在 Go 代码中，我们会把代码和测试代码放在同样的 `package`下面，这样测试代码就可以直接访问需要测试的代码。但是有些情况下我们不能这么做，比如 在单元测试中我们需要打印测试结果，需要调用 `fmt` 的代码，而 `fmt` 包自身的代码也需要测试。Go 给出的解决方案是将测试代码的 `package` 命名为 `fmt_test`, 这样就同时导入了 `fmt` 和 `testing` 的代码，他们相互直接也避免了循环引用；
+2. 我们在Ginkgo 测试里面使用的 package 名为 `stringutil_test`，这个命名有值得注意的地方。通常在 Go 代码中，我们会把代码和测试代码放在同样的 `package`下面，这样测试代码就可以直接访问需要测试的代码。但是有些情况下我们不能这么做，比如 在单元测试中我们需要打印测试结果，需要调用 `fmt` 的代码，而 `fmt` 包自身的代码也需要测试。Go 给出的解决方案是将测试代码的 `package` 命名为 `fmt_test`, 这样就同时导入了 `fmt` 和 `testing` 的代码，他们相互之间也避免了循环引用；
 3. `Expect(got).To(Equal(c.want))` 风格的断言就来自于 Gomega；
 4. Ginkgo 可以自动生成一些样板代码(Boilerplate code)，并可以监视文件系统 (ginkgo watch -r)，在文件变化以后自动运行测试，等等高级特性，详见[它的文档](http://onsi.github.io/ginkgo/)。
 
