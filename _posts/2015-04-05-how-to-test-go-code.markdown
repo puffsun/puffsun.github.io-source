@@ -9,9 +9,9 @@ description: Test Go code with build-in testing library and third-party test lib
 ---
 
 ### 软件测试的重要性
-关于软件测试是否重要，我想大家都有共识。ThoughtWorks 的大牛Michael C. Feathers在他的成名作[Working Effectively with Legacy Code](http://www.amazon.com/Working-Effectively-Legacy-Michael-Feathers/dp/0131177052)的序言写道：
+关于软件测试是否重要，我想大家都有共识。ThoughtWorks 的大牛Michael C. Feathers在他的成名作 [Working Effectively with Legacy Code](http://www.amazon.com/Working-Effectively-Legacy-Michael-Feathers/dp/0131177052) 的序言写道：
 
->对于我来说，遗留代码简单来讲就是没有测试覆盖的代码。不管它写得多好，也不管它面向对象封装得有多精美，没有测试覆盖的代码都是烂代码。有了测试覆盖，我们可以在可被验证的情况下快速的改变我们代码的行为，而如果没有测试覆盖，我们无从得知我们的代码是在变好还是在变坏。
+>对于我来说，遗留代码 (Legacy Code) 简单来讲就是没有测试覆盖的代码。不管它写得多好，也不管它面向对象封装得有多精美，没有测试覆盖的代码都是烂代码。有了测试覆盖，我们可以在可被验证的情况下快速的改变我们代码的行为，而如果没有测试覆盖，我们无从得知我们的代码是在变好还是在变坏。
 
 随便列几条好处：
 
@@ -168,9 +168,10 @@ var _ = Describe("StringutilTest", func() {
 {%endhighlight%}
 这里需要注意的是：
 
-1. 我们在Ginkgo 测试里面使用的 package 名为 `stringutil_test`，这个命名有值得注意的地方。通常在 Go 代码中，我们会把代码和测试代码放在同样的 `package`下面，这样测试代码就可以直接访问需要测试的代码。但是有些情况下我们不能这么做，比如 在单元测试中我们需要打印测试结果，需要调用 `fmt` 的代码，而 `fmt` 包自身的代码也需要测试。Go 给出的解决方案是将测试代码的 `package` 命名为 `fmt_test`, 这样就同时导入了 `fmt` 和 `testing` 的代码，他们相互直接也避免了循环引用；
-2. `Expect(got).To(Equal(c.want))` 风格的断言就来自于 Gomega；
-3. Ginkgo 可以自动生成一些样板代码(Boilerplate code)，并可以监视文件系统，在文件变化以后自动运行测试，等等高级特性，详见[它的文档](http://onsi.github.io/ginkgo/)。
+1. 我们需要在项目根目录下运行 `ginkgo -r .` 来运行 Ginkgo 测试代码；
+2. 我们在Ginkgo 测试里面使用的 package 名为 `stringutil_test`，这个命名有值得注意的地方。通常在 Go 代码中，我们会把代码和测试代码放在同样的 `package`下面，这样测试代码就可以直接访问需要测试的代码。但是有些情况下我们不能这么做，比如 在单元测试中我们需要打印测试结果，需要调用 `fmt` 的代码，而 `fmt` 包自身的代码也需要测试。Go 给出的解决方案是将测试代码的 `package` 命名为 `fmt_test`, 这样就同时导入了 `fmt` 和 `testing` 的代码，他们相互直接也避免了循环引用；
+3. `Expect(got).To(Equal(c.want))` 风格的断言就来自于 Gomega；
+4. Ginkgo 可以自动生成一些样板代码(Boilerplate code)，并可以监视文件系统 (ginkgo watch -r)，在文件变化以后自动运行测试，等等高级特性，详见[它的文档](http://onsi.github.io/ginkgo/)。
 
 ### 其他非常有价值工具
 
