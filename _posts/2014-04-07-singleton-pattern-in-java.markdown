@@ -4,7 +4,7 @@ title: "Singleton Design Pattern in Java"
 date: 2014-04-07 06:54:11 +0800
 comments: true
 categories: Java
-keywords: Singleton Design Pattern AccessibleObject Java MultiThreading Classloader
+keywords: codethoughts.info codethoughts Singleton Design Pattern AccessibleObject Java MultiThreading Classloader
 description: Singleton Design Pattern AccessibleObject Java MultiThreading Classloader
 ---
 

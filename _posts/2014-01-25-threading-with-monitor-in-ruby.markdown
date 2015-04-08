@@ -5,7 +5,7 @@ date: 2014-01-25 00:45:07 +0800
 comments: true
 categories: ["Ruby"]
 
-keywords: "Todo, Thread, Ruby, Deadlock, Monitor, Monitormixin, sychronize"
+keywords: "codethoughts.info codethoughts Todo, Thread, Ruby, Deadlock, Monitor, Monitormixin, sychronize"
 description: "How to write multi-threaded code leverage MonitorMixin in Ruby"
 ---
 

@@ -5,7 +5,7 @@ date: 2015-04-04T07:20:57+08:00
 comments: true
 categories: ["Go"]
 
-keywords: "Go Golang Web Application Docker Deploy Development web应用 部署 Go语言 软件编程"
+keywords: "codethoughts.info codethoughts Go Golang Web Application Docker Deploy Development web应用 部署 Go语言 软件编程"
 description: "Deploy Go Web App with Docker"
 ---
 

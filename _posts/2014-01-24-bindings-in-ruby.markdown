@@ -5,7 +5,7 @@ date: 2014-01-24 14:43:40 +0800
 comments: true
 categories: ["Ruby"]
 
-keywords: "Ruby, Binding, Blocks, eRuby, erb, template, debugging"
+keywords: "codethoughts.info codethoughts Ruby, Binding, Blocks, eRuby, erb, template, debugging"
 description: "How to use Binding object and Kernel#binding in Ruby"
 ---
 

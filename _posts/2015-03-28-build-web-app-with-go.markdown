@@ -5,7 +5,7 @@ date: 2015-03-28T22:01:52+08:00
 comments: true
 categories: ["Go"]
 
-keywords: "Go Golang web application software programming web应用 软件编程 tutorial 教程"
+keywords: "codethoughts.info codethoughts Go Golang web application software programming web应用 软件编程 tutorial 教程"
 description: "Build Web Application with Golang"
 ---
 

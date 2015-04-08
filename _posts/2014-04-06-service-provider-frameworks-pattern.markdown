@@ -4,7 +4,7 @@ title: "Service Provider Frameworks Pattern"
 date: 2014-04-06 22:39:44 +0800
 comments: true
 categories: Java
-keywords: JDBC Service Provider Frameworks pattern SPI service provicer mechanism
+keywords: codethoughts.info codethoughts JDBC Service Provider Frameworks pattern SPI service provicer mechanism
 description: JDBC Service Provider Frameworks pattern SPI service provicer mechanism
 ---
 

@@ -3,6 +3,7 @@ layout: page
 title: "About me"
 description: "Dream Dare Do"
 header-img: "img/about-bg.jpg"
+keywords: "codethoughts.info codethoughts George Sun Full-stack Web Developer Golang Go Java JavaScript Ruby Rails Linux Software Programming Language"
 ---
 
 My name is George Sun, I'm an full-stack Web software developer, working at EMC Shanghai COE. But the contents in this blog has nothing to do with my work, basically they're my thoughts on software programming, it's just **Yet Another Tech Blog**.

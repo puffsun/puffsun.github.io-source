@@ -4,7 +4,7 @@ title: "Differences among Blocks, Procs, and Lambdas in Ruby"
 date: 2014-02-24 22:17:52 +0800
 comments: true
 categories: Ruby
-keywords: Block Proc Lambda Ruby
+keywords: codethoughts.info codethoughts George Sun Block Proc Lambda Ruby
 description: Difference among blocks, procs, and lambdas in Ruby programming language.
 ---
 

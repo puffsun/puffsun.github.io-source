@@ -4,7 +4,7 @@ title: "Solutions to Scala for the Impatient - Chapter1 and Chapter2"
 date: 2014-02-24 20:09:58 +0800
 comments: true
 categories: Scala
-keywords: Scala impatient solutions
+keywords: codethoughts.info codethoughts Scala impatient solutions
 description: Scala impatient solutions
 ---
 

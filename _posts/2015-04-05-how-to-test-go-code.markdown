@@ -4,7 +4,7 @@ title: "如何测试 Go 代码 - 单元测试"
 date: 2015-04-05T15:15:51+08:00
 comments: true
 categories: ["Go"]
-keywords: Testing Test "Unit Test" "Integration Test" Go Golang 测试 单元测试 集成测试 httptest http goconvey Ginkgo GΩmega Gomega
+keywords: codethoughts.info codethoughts Testing Test "Unit Test" "Integration Test" Go Golang 测试 单元测试 集成测试 httptest http goconvey Ginkgo GΩmega Gomega
 description: Test Go code with build-in testing library and third-party test library
 ---
 

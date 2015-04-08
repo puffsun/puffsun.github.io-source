@@ -5,7 +5,7 @@ date: 2014-01-23 13:27:14 +0800
 comments: true
 categories: ["Ruby"]
 
-keywords: "Design patterns, Builder, Factory, Builder, Composite, Decorator, Proxy, Command, Singleton"
+keywords: "codethoughts.info codethoughts Design patterns, Builder, Factory, Builder, Composite, Decorator, Proxy, Command, Singleton"
 description: "Design patterns in Ruby"
 ---
 
