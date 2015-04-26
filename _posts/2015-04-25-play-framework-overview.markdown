@@ -9,7 +9,7 @@ description: Overview of play framework, Java web development framework for Agil
 ---
 
 ### 为什么写这篇文章
-前段时间花时间比较了几个 Web 框架，考量的对象来自于 Golang 社区和 Java 社区：[Beego](http://beego.me/), [Martini](http://martini.codegangsta.io/), [Play! 2](https://www.playframework.com/), [Spring MVC](http://projects.spring.io/spring-framework/)。在选择的过程中并没有多少客观的统计数据，全凭我的个人理解和不同社区人选型时候的分析，在这篇文章里面我想聊聊为什么会最终选择 [Play! 2 Framework](https://www.playframework.com/)，以及对 Play! 2 Framework 的大致观感，最后就是用最少的步骤搭建一个基于 Play! 的项目。
+前段时间花时间比较了几个 Web 框架，考量的对象来自于 Golang 社区和 Java 社区：[Beego](http://beego.me/), [Martini](http://martini.codegangsta.io/), [Play! 2](https://www.playframework.com/), [Spring MVC](http://projects.spring.io/spring-framework/)。在选择的过程中并没有多少客观的统计数据，全凭我的个人理解和不同社区的开发者在选型时候的分析，在这篇文章里面我想聊聊为什么会最终选择 [Play! 2 Framework](https://www.playframework.com/)，以及对 Play! 2 Framework 的大致观感，最后就是用最少的步骤搭建一个基于 Play! 的项目。
 
 ### Web 框架选型的依据
 通常来说，你需要考量以下方面：
@@ -209,7 +209,7 @@ More command help available using 'help <command>' for:
 这里我就不再一一讲解了，如果你有兴趣，那么可以自己去探索。
 
 ### 结语
-如果你喜欢 Ruby on Rails 开发的高效，有喜欢 Java/Scala 静态语言的编译期代码检查以及稳定性，那么 Play! 框架你应该认真考虑一下，它是我至今用过的开发最高效的 Java Web 框架。
+如果你喜欢 Ruby on Rails 开发的高效，又喜欢 Java/Scala 静态语言的编译期代码检查以及稳定性，那么 Play! 框架你应该认真考虑一下，它是我至今用过的开发最高效的 Java Web 框架。
 
 ### 资源
 [Play! framework 官网](https://www.playframework.com/)
