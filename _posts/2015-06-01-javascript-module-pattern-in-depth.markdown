@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "深度解析 JavaScript 模块化"
+title: "深入 JavaScript 模块化模式"
 date: 2015-06-01T21:44:06+08:00
 comments: true
 categories: ["javascript"]
