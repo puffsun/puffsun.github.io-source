@@ -16,7 +16,7 @@ description: find the lost this in JavaScript
 ## 为什么要讨论 JavaScript 的 `this`
 JavaScript 中的 `this` 是让新手甚至是使用 JavaScript 多年的老手经常感到困惑的地方。有的时候 `this` 指向的是全局对象，有的时候是当前的调用对象，在很多 JavaScript 类库中，`this` 经常被绑定到当前所操作的 DOM 对象上，比如 jQuery 对的事件绑定方法，这让 JavaScript 中的 `this` 显得很神秘，这篇博客的目的就是解开 `this` 那神秘的面纱。后面我们会一一讲述以上这几种情况，在讲解之前，我们先理解 JavaScript 代码的调用点(Call-site)和调用栈(Call-stack)。
 
-### JavaScript 函数的调用点(Call-site)
+## JavaScript 函数的调用点(Call-site)
 顾名思义，函数的调用点就是函数被调用的地方，请注意，并不是被函数被声明的地方。来看这一段代码（来自[You Don't Know JS](https://github.com/getify/You-Dont-Know-JS/blob/master/this%20%26%20object%20prototypes/ch2.md)）：
 
 {%highlight js lineno%}
@@ -189,7 +189,7 @@ console.log( b ); // 5
 `bind()`返回了一个新的函数，这个函数的 `this` 被强制绑定到我们指定的任意对象上，这里是 `obj`。
 
 
-### 通过 `new` 关键字绑定
+### 规则4：通过 `new` 关键字绑定
 JavaScript 中的任意函数，如果在调用的时候，前面 `new` 关键字，那么如下的几件事情会依次发生：
 
 1. 新对象被创建；
@@ -210,10 +210,10 @@ console.log( bar.a ); // 2
 
 `new foo(...)` 把新创建的对象绑定为 `this`，这也就是 `new` 绑定。
 
-### 确定 `this`
+## 确定 `this`
 在这里，对于如何给确定 `this` 的指向，我直接给出结论，感兴趣的可以到[这里](https://github.com/getify/You-Dont-Know-JS/blob/master/this%20%26%20object%20prototypes/ch2.md)查看详细的分析。
 
-首先找出函数的调用点，据此分析上述四个规则哪一种被首先应用了，如果同时存在两种以上的规则，那么优先级高的首先被应用。
+首先找出函数的调用点，据此分析上述四个规则哪一种被首先应用了，如果同时存在两种以上的规则，那么会应用优先级高的规则。
 
 * 函数被 `new` 关键字调用了吗？如果是，那么 `this` 就是新创建的对象。
     {%highlight js lineno%}
@@ -237,10 +237,10 @@ console.log( bar.a ); // 2
     
 `this` 被应用的优先级按照这里对4条规则的检查顺序由高到低排列。
     
-### 例外
-在上述的四个规则之外，还有几种情况可以作为例外来处理，比如在显式绑定的时候，传入 `null` 或者 `undefined`，这时候传入参数会被忽略，而默认绑定会生效。其他的少数情况可以参见[这里](https://github.com/getify/You-Dont-Know-JS/blob/master/this%20%26%20object%20prototypes/ch2.md)，限于篇幅，我就不一一列举了。
+## 例外
+在上述的四个规则之外，还有几种情况可以作为例外来处理，比如在显式绑定的时候，传入 `null` 或者 `undefined`，这时候 `this` 不会指向 `null` 或者 `undefined`，而默认绑定会生效。其他的少数情况可以参见[这里](https://github.com/getify/You-Dont-Know-JS/blob/master/this%20%26%20object%20prototypes/ch2.md)，限于篇幅，我就不一一列举了。
 
-### 资源
+## 资源
 [You Don't Know JS: this & Object Prototypes](https://github.com/getify/You-Dont-Know-JS/blob/master/this%20%26%20object%20prototypes)
 
 
