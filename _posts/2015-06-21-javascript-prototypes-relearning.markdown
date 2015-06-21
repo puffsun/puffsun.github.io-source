@@ -27,7 +27,7 @@ Prototype 是 JavaScript 中很重要的一个知识点，是学习 JavaScript �
 
 翻译一下：JavaScript 是基于 Prototype 的脚本语言，它是动态类型的，并且在 JavaScript 里函数是一等公民。这些混合的特性使得 JavaScript 成为了支持面向对象、命令式和函数式的多范型语言。
 
-短短两句话，包含了很多内容。我们这里对多范型、动态类型等暂且按下不表，以后的文章可能会陆续涉及，因为它们都是比较大的主题。在这篇文章里我先跟大家大致的聊聊 Prototype，以及为什么 JavaScript 被称为是基于 `Prorotype` 的语言，另外看看目前对于 Prototype 的使用一个比较大误区，也就是很多人和很多现存的类库利用 Prototype 来为 JavaScript 语言构建面向对象的继承和多态特性，当然了，这也可能是本文比较有争议的地方。
+短短两句话，包含了很多内容。我们这里对多范型、动态类型等暂且按下不表，以后的文章可能会陆续涉及，因为它们都是比较大的主题。在这篇文章里我先跟大家大致的聊聊 Prototype，以及为什么 JavaScript 被称为是基于 `Prototype` 的语言，另外看看目前对于 Prototype 的使用一个比较大误区，也就是很多人和很多现存的类库利用 Prototype 来为 JavaScript 语言构建面向对象的继承和多态特性，当然了，这也可能是本文比较有争议的地方。
 
 ## Prototype 是什么
 所有的 JavaScript 对象都有一个隐含的属性来指向另外一个对象，我们称这个隐含的属性为 `Prototype`。当然了这个属性有可能是 `null`，比如用这种方式创建的对象：
@@ -105,7 +105,7 @@ b.myName(); // "a"
 b.myLabel(); // "obj a"
 {%endhighlight%}
 
-这段代码模拟了传统的面向对象编程，在这里 `Foo` 作为父类，而 `Bar` 作为子类。在这段代码里我们需要注意如下的几点：
+这段代码模拟了传统的面向对象编程，在这里 `Foo` 作为父类，而 `Bar` 作为子类，`Foo` 和 `Bar`之间通过 `Prototype` 链来建立了继承关系。在这段代码里我们需要注意如下的几点：
 
 1. `Bar.prototype = Object.create( Foo.prototype );` 创建了 `Bar` 和 `Foo` 的父子关系，在这行代码运行之前，`Bar.prototype` 指向 `Object.prototype`，这之后则指向了 `Foo.prototype`；
 2. JavaScript ES6 引入了设置对象 `Prototype` 链的标准做法，它通过修改现有的 `Prototype` 来实现，而不是通过像 `Object.prototype`一样通过新创建一个对象来替换原有的对象来实现，同时它也保证了 `constructor` 的一致性，虽然在实际中 `constructor` 基本上没有什么用处；
