@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Singleton Design Pattern in Java"
+author: George Sun
 date: 2014-04-07 06:54:11 +0800
 comments: true
 categories: Java

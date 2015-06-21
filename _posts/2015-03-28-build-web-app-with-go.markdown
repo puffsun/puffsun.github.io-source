@@ -4,7 +4,7 @@ title: "用 Go 开发 Web 应用"
 date: 2015-03-28T22:01:52+08:00
 comments: true
 categories: ["Go"]
-
+author: George Sun
 keywords: "codethoughts.info codethoughts Go Golang web application software programming web应用 软件编程 tutorial 教程"
 description: "Build Web Application with Golang"
 ---

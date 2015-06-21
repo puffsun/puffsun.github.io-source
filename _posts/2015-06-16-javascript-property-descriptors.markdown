@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "JavaScript 属性描述符"
+author: George Sun
 date: 2015-06-16T07:33:45+08:00
 comments: true
 categories: ["javascript"]

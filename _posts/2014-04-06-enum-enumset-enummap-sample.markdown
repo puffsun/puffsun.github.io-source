@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Enum, EnumSet, and EnumMap Sample"
+author: George Sun
 date: 2014-04-06 20:50:38 +0800
 comments: true
 categories: Java

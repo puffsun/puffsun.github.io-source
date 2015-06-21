@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Play! Framework 大致观感"
+author: George Sun
 date: 2015-04-25T10:02:59+08:00
 comments: true
 categories: ["Java"]

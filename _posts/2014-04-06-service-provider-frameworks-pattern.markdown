@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Service Provider Frameworks Pattern"
+author: George Sun
 date: 2014-04-06 22:39:44 +0800
 comments: true
 categories: Java

@@ -4,7 +4,7 @@ title: "Ruby 2.1 New Features"
 date: 2014-01-23 11:22:29 +0800
 comments: true
 categories: ["Ruby"]
-
+author: George Sun
 keywords: "codethoughts.info codethoughts Ruby 2.1, new features, Refinements, Rational and Complex Number literals, Required keywords, GC"
 description: "What's new in Ruby 2.1"
 ---

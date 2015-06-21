@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "JavaScript Getters 和 Setters"
+author: George Sun
 date: 2015-06-18T07:57:52+08:00
 comments: true
 categories: ["javascript"]

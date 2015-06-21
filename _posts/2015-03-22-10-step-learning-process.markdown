@@ -4,7 +4,7 @@ title: "快速学习新技能"
 date: 2015-03-22T19:01:43+08:00
 comments: true
 categories: ["learn"]
-
+author: George Sun
 keywords: "codethoughts.info codethoughts learning learn 10-step process new technology frameworks 10步学习法 新技术 学习 软件"
 description: "10-step process to learn new technology"
 ---

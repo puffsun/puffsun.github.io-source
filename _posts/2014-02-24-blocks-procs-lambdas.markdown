@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Differences among Blocks, Procs, and Lambdas in Ruby"
+author: George Sun
 date: 2014-02-24 22:17:52 +0800
 comments: true
 categories: Ruby

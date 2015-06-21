@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "JavaScript 闭包详解"
+author: George Sun
 date: 2015-05-22T23:07:39+08:00
 comments: true
 categories: ["javascript"]

@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "寻找 JavaScript 的 this"
+author: George Sun
 date: 2015-06-04T19:23:10+08:00
 comments: true
 categories: ["javascript"]

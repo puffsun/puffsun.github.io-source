@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Bootstrap 响应式栅格"
+author: George Sun
 date: 2015-04-26T18:02:12+08:00
 comments: true
 categories: ["Bootstrap"]

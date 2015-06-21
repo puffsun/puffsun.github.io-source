@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Solutions to Scala for the Impatient - Chapter5"
+author: George Sun
 date: 2014-03-09 20:03:35 +0800
 comments: true
 categories: Scala

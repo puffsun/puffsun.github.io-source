@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "如何测试 Go 代码 - 单元测试"
+author: George Sun
 date: 2015-04-05T15:15:51+08:00
 comments: true
 categories: ["Go"]

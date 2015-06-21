@@ -4,7 +4,7 @@ title: "Bindings in Ruby"
 date: 2014-01-24 14:43:40 +0800
 comments: true
 categories: ["Ruby"]
-
+author: George Sun
 keywords: "codethoughts.info codethoughts Ruby, Binding, Blocks, eRuby, erb, template, debugging"
 description: "How to use Binding object and Kernel#binding in Ruby"
 ---

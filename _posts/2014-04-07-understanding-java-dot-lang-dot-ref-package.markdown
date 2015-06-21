@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Understanding of java.lang.ref Package"
+author: George Sun
 date: 2014-04-07 15:03:55 +0800
 comments: true
 categories: Java

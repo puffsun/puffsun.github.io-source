@@ -2,7 +2,7 @@
 layout: post
 title: "关于 Angular.js 你需要知道的知识"
 date: 2015-05-15T19:50:20+08:00
-
+author: George Sun
 comments: true
 categories: ["Angular.js"]
 keywords: codethoughts.info codethoughts Front-end UI CSS LESS Angular AngularJS Angular.js Framework
