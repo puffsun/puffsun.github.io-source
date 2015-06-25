@@ -78,7 +78,7 @@ $ vim blog.html
         <div class="col-md-4">            <h3>Post Title 2</h3>            <p>Lorem ipsum dolor sit amet ... </p>        </div>        <div class="col-md-4">            <h3>Post Title 3</h3>            <p>Lorem ipsum dolor sit amet ... </p>        </div>        <div class="col-md-4">            <h3>Post Title 4</h3>            <p>Lorem ipsum dolor sit amet ... </p>        </div>        <div class="col-md-4">            <h3>Post Title 5</h3>            <p>Lorem ipsum dolor sit amet ... </p>        </div>        <div class="col-md-4">            <h3>Post Title 6</h3>            <p>Lorem ipsum dolor sit amet ... </p>        </div>    </div>
     </div>
 {%endhighlight%}
-我把代码放在[jsbin.com](jsbin.com)上面了，可以通过[这个链接](http://jsbin.com/vejixoceje/2)来预览效果。jsbin 是很赞的前端快速分享、协作工具，并且支持 GitHub 集成登录。
+我把代码放在[jsbin.com](http://www.jsbin.com)上面了，可以通过[这个链接](http://jsbin.com/vejixoceje/2)来预览效果。jsbin 是很赞的前端快速分享、协作工具，并且支持 GitHub 集成登录。
 
 这里我们可以看到，Bootstrap 允许一行被分隔成12列，我们设定每列占宽为4，多余的列则被挤到下一行显示。
 
@@ -97,7 +97,7 @@ $ vim blog.html
 <div class="container">    <div class="row">        <div class="col-md-12 text-center">            <h1>My First Bootstrap Blog</h1>        </div>    </div>    <hr>    <div class="row">        <div class="col-md-4 col-sm-6 col-xs-12">            <h3>Post Title 1</h3>            <p>Lorem ipsum dolor sit amet ... </p>        </div>        <div class="col-md-4 col-sm-6 col-xs-12">            <h3>Post Title 2</h3>            <p>Lorem ipsum dolor sit amet ... </p>        </div>        <div class="col-md-4 col-sm-6 col-xs-12">            <h3>Post Title 3</h3>            <p>Lorem ipsum dolor sit amet ... </p>        </div>        <div class="col-md-4 col-sm-6 col-xs-12">            <h3>Post Title 4</h3>            <p>Lorem ipsum dolor sit amet ... </p>        </div>        <div class="col-md-4 col-sm-6 col-xs-12">            <h3>Post Title 5</h3>            <p>Lorem ipsum dolor sit amet ... </p>        </div>        <div class="col-md-4 col-sm-6 col-xs-12">            <h3>Post Title 6</h3>            <p>Lorem ipsum dolor sit amet ... </p>        </div>    </div></div>
 {%endhighlight%}
 
-效果可以通过[这个链接](http://jsbin.com/haciwo/1)来预览，感谢 [jsbin.com](jsbin.com)。
+效果可以通过[这个链接](http://jsbin.com/haciwo/1)来预览，感谢 [jsbin.com](http://jsbin.com)。
 
 ### 结论
 到这里我们就可以看到用 Bootstrap 来开发一个 Responsive, Mobile First的网站有多么容易，也大大减小了像我这样从后端向全栈转型的工程师的阻力。Bootstrap 除了 Grid System 以外，还提供了很多内容，包括导航(Navigation)，面包屑(Breadcramp)，Form 以及其他组件，并提供了Less/SASS扩展支持，详细情况请参考[这个页面](http://getbootstrap.com/components/)。
