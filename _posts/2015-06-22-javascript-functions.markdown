@@ -165,7 +165,7 @@ for (var i=0; i<10; i++) {
 console.log("i = " + i); // i = 10
 {%endhighlight%}
 
-我们在 `for` 循环里面定义的变量 `i` 在村换外部仍然是可见的，也就是说，在 JavaScript 里，代码块 `{}` 不是作用域的边界，这一点困惑了很多 JavScript 新手。如果你希望引入新的作用域，那么必须求助于函数：
+我们在 `for` 循环里面定义的变量 `i` 在循环外部仍然是可见的，也就是说，在 JavaScript 里，代码块 `{}` 不是作用域的边界，这一点困惑了很多 JavScript 新手。如果你希望引入新的作用域，那么必须求助于函数：
 
 {%highlight js lineno%}
 var a = 2;
