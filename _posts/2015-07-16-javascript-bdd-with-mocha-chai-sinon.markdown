@@ -14,7 +14,7 @@ description: JavaScript Object Equality
 
 JavaScript 是一门动态语言，它没有类似静态语言的编译期语法检查，为了使得代码易于维护和重构，我们需要用自动化测试覆盖 JavaScript 代码。这篇文章将会介绍如何使用 Mocha 为 JavaScript 代码写自动化测试，主要是单元测试，因为单元测试是开发者日常工作中最常接触的自动化测试了。
 
-本文将会将会使用 [BDD](https://en.wikipedia.org/wiki/Behavior-driven_development) 风格的测试代码，这种风格的测试写出的代码类似自然语言，常见的一些语法比如 `describe`, `expect`, `should` 等等。熟悉 Ruby 的人都应该知道 Ruby 社区大名鼎鼎的 [RSpec](http://rspec.info/)，在 JavaScript 社区也有类似的测试框架，比如我们今天要介绍的 [Mocha](http://mochajs.org/) 就是其中一种比较流行的 BDD 测试框架，利用它可以写出和 Spec 风格非常接近的测试代码，另外一个是 [Jasmine](https://github.com/jasmine/jasmine)，因为篇幅原因，我们今天不会涉及到。
+本文将会使用 [BDD](https://en.wikipedia.org/wiki/Behavior-driven_development) 风格的测试代码，这种风格的测试写出的代码类似自然语言，常见的一些语法比如 `describe`, `expect`, `should` 等等。熟悉 Ruby 的人都应该知道 Ruby 社区大名鼎鼎的 [RSpec](http://rspec.info/)，在 JavaScript 社区也有类似的测试框架，比如我们今天要介绍的 [Mocha](http://mochajs.org/) 就是其中一种比较流行的 BDD 测试框架，利用它可以写出和 Spec 风格非常接近的测试代码，另外一个是 [Jasmine](https://github.com/jasmine/jasmine)，因为篇幅原因，我们今天不会涉及到。
 
 ## BDD vs. TDD
 事实上，Mocha 既支持 TDD 风格的测试代码，也支持 BDD 风格的测试代码，我们来看两段分别演示了这两种风格的测试代码。
