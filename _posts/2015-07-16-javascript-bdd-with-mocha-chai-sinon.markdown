@@ -135,7 +135,7 @@ Mocha 用于运行测试代码，我们需要全局安装：
 
 ## 需要测试的代码
 
-为了全面的展示 Mocha 和 Jasmine 这两个测试框架，我们这里用它来测试一段比较复杂的代码。这段代码是用 JavaScript 实现了 [有向图](https://en.wikipedia.org/wiki/Directed_graph)，并且图的边可以带有权重。如果你对这段代码有兴趣，可以研究一下具体的实现，代码也有详细的注释；而如果你仅仅对如何写测试有兴趣，那么可以忽略具体的实现，把它仅仅当成黑盒子。在阅读代码的时候请注意，我们这里所写的是 Node.js 代码，它用 CommonJS 来管理依赖。简单讲，就是用 `module.exports` 来导出公开的接口，没有指定导出的函数很变量无法被其他源文件的代码引用，它们的范围就会被局限在自身的源文件中；如果需要应用其他源文件的依赖，则需要 `require` 来指定需要导入的依赖。除了 [有向图](https://en.wikipedia.org/wiki/Directed_graph)，我还用 JavaScript 实现了其他常见数据结构和算法，并且都有测试覆盖，如果有兴趣，可以参考我的 GitHub Repo: [Data Structures and Algorithms with JavaScript](https://github.com/puffsun/js_datastructures_algorithms)，里面有详细的指示如何去运行这个 Repo 里的测试代码，所有的测试都使用 Mocha 框架编写。
+为了全面的展示 Mocha 测试框架，我们这里用它来测试一段比较复杂的代码。这段代码是用 JavaScript 实现了 [有向图](https://en.wikipedia.org/wiki/Directed_graph)，并且图的边可以带有权重。如果你对这段代码有兴趣，可以研究一下具体的实现，代码也有详细的注释；而如果你仅仅对如何写测试有兴趣，那么可以忽略具体的实现，把它仅仅当成黑盒子。在阅读代码的时候请注意，我们这里所写的是 Node.js 代码，它用 CommonJS 来管理依赖。简单讲，就是用 `module.exports` 来导出公开的接口，没有指定导出的函数很变量无法被其他源文件的代码引用，它们的范围就会被局限在自身的源文件中；如果需要应用其他源文件的依赖，则需要 `require` 来指定需要导入的依赖。除了 [有向图](https://en.wikipedia.org/wiki/Directed_graph)，我还用 JavaScript 实现了其他常见数据结构和算法，并且都有测试覆盖，如果有兴趣，可以参考我的 GitHub Repo: [Data Structures and Algorithms with JavaScript](https://github.com/puffsun/js_datastructures_algorithms)，里面有详细的指示如何去运行这个 Repo 里的测试代码，所有的测试都使用 Mocha 框架编写。
 
 {%highlight js lineno%}
 /*
