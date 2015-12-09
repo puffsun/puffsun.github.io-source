@@ -4,3 +4,4 @@
 _site
 .deploy
 _deploy.yml
+.python-version
