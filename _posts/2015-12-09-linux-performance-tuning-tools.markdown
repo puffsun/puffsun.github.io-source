@@ -201,6 +201,6 @@ sda              12.26       107.60        98.81     995651     914324
 
 [20 Command Line Tools to Monitor Linux Performance](http://www.tecmint.com/command-line-tools-to-monitor-linux-performance/)
 
-[How Linux Worls 2nd edition](http://www.amazon.com/How-Linux-Works-Superuser-Should/dp/1593275676)
+[How Linux Works 2nd edition](http://www.amazon.com/How-Linux-Works-Superuser-Should/dp/1593275676)
 
  
